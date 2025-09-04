@@ -55,17 +55,17 @@ class Spinner(Widget):
     y_pos = center_y + TEXTURE_SIZE / 2.0 + spacing
 
     center = rl.Vector2(rect.width / 2.0, center_y)
-    spinner_origin = rl.Vector2(TEXTURE_SIZE / 2.0, TEXTURE_SIZE / 2.0)
+    spinner_origin = rl.Vector2(TEXTURE_SIZE / 5.0, TEXTURE_SIZE / 5.0)
     comma_position = rl.Vector2(center.x - TEXTURE_SIZE / 2.0, center.y - TEXTURE_SIZE / 2.0)
 
     delta_time = rl.get_frame_time()
     self._rotation = (self._rotation + DEGREES_PER_SECOND * delta_time) % 360.0
 
     # Draw rotating spinner and static comma logo
-    #rl.draw_texture_pro(self._spinner_texture, rl.Rectangle(0, 0, TEXTURE_SIZE, TEXTURE_SIZE),
-    #                    rl.Rectangle(center.x, center.y, TEXTURE_SIZE, TEXTURE_SIZE),
-    #                    spinner_origin, self._rotation, rl.WHITE)
-    #rl.draw_texture_v(self._comma_texture, comma_position, rl.WHITE)
+    rl.draw_texture_pro(self._spinner_texture, rl.Rectangle(0, 0, TEXTURE_SIZE, TEXTURE_SIZE),
+                        rl.Rectangle(center.x, center.y-20, TEXTURE_SIZE, TEXTURE_SIZE),
+                        spinner_origin, self._rotation, rl.WHITE)
+    rl.draw_texture_v(self._comma_texture, comma_position, rl.WHITE)
 
     # Display the progress bar or text based on user input
     if self._progress is not None:
