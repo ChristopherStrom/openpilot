@@ -21,8 +21,8 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   std::vector<std::tuple<QString, QString, QString, QString, bool>> toggle_defs{
     {
       "OpenpilotEnabledToggle",
-      tr("Enable sunnypilot"),
-      tr("Use the sunnypilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature."),
+      tr("Enable CyberPilot"),
+      tr("Use the CyberPilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature."),
       "../assets/icons/chffr_wheel.png",
       true,
     },
@@ -36,14 +36,14 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     {
       "DynamicExperimentalControl",
       tr("Enable Dynamic Experimental Control"),
-      tr("Enable toggle to allow the model to determine when to use sunnypilot ACC or sunnypilot End to End Longitudinal."),
+      tr("Enable toggle to allow the model to determine when to use CyberPilot ACC or CyberPilot End to End Longitudinal."),
       "../assets/offroad/icon_blank.png",
       false,
     },
     {
       "DisengageOnAccelerator",
       tr("Disengage on Accelerator Pedal"),
-      tr("When enabled, pressing the accelerator pedal will disengage sunnypilot."),
+      tr("When enabled, pressing the accelerator pedal will disengage CyberPilot."),
       "../assets/icons/disengage_on_accelerator.svg",
       false,
     },
@@ -57,7 +57,7 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     {
       "AlwaysOnDM",
       tr("Always-On Driver Monitoring"),
-      tr("Enable driver monitoring even when sunnypilot is not engaged."),
+      tr("Enable driver monitoring even when CyberPilot is not engaged."),
       "../assets/icons/monitoring.png",
       false,
     },
@@ -87,8 +87,8 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
 
   std::vector<QString> longi_button_texts{tr("Aggressive"), tr("Standard"), tr("Relaxed")};
   long_personality_setting = new ButtonParamControl("LongitudinalPersonality", tr("Driving Personality"),
-                                          tr("Standard is recommended. In aggressive mode, sunnypilot will follow lead cars closer and be more aggressive with the gas and brake. "
-                                             "In relaxed mode sunnypilot will stay further away from lead cars. On supported cars, you can cycle through these personalities with "
+                                          tr("Standard is recommended. In aggressive mode, CyberPilot will follow lead cars closer and be more aggressive with the gas and brake. "
+                                             "In relaxed mode CyberPilot will stay further away from lead cars. On supported cars, you can cycle through these personalities with "
                                              "your steering wheel distance button."),
                                           "../assets/icons/speed_limit.png",
                                           longi_button_texts);
@@ -166,9 +166,9 @@ void TogglesPanel::updateToggles() {
                                           "%3<br>"
                                           "<h4>%4</h4><br>"
                                           "%5<br>")
-                                  .arg(tr("sunnypilot defaults to driving in <b>chill mode</b>. Experimental mode enables <b>alpha-level features</b> that aren't ready for chill mode. Experimental features are listed below:"))
+                                  .arg(tr("CyberPilot defaults to driving in <b>chill mode</b>. Experimental mode enables <b>alpha-level features</b> that aren't ready for chill mode. Experimental features are listed below:"))
                                   .arg(tr("End-to-End Longitudinal Control"))
-                                  .arg(tr("Let the driving model control the gas and brakes. sunnypilot will drive as it thinks a human would, including stopping for red lights and stop signs. "
+                                  .arg(tr("Let the driving model control the gas and brakes. CyberPilot will drive as it thinks a human would, including stopping for red lights and stop signs. "
                                           "Since the driving model decides the speed to drive, the set speed will only act as an upper bound. This is an alpha quality feature; "
                                           "mistakes should be expected."))
                                   .arg(tr("New Driving Visualization"))
@@ -198,9 +198,9 @@ void TogglesPanel::updateToggles() {
                           tr("openpilot longitudinal control may come in a future update.");
       if (CP.getAlphaLongitudinalAvailable()) {
         if (is_release) {
-          long_desc = unavailable + " " + tr("An alpha version of sunnypilot longitudinal control can be tested, along with Experimental mode, on non-release branches.");
+          long_desc = unavailable + " " + tr("An alpha version of CyberPilot longitudinal control can be tested, along with Experimental mode, on non-release branches.");
         } else {
-          long_desc = tr("Enable the sunnypilot longitudinal control (alpha) toggle to allow Experimental mode.");
+          long_desc = tr("Enable the CyberPilot longitudinal control (alpha) toggle to allow Experimental mode.");
         }
       }
       experimental_mode_toggle->setDescription("<b>" + long_desc + "</b><br><br>" + e2e_description);
@@ -261,7 +261,7 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   addItem(resetCalibBtn);
 
 #ifndef SUNNYPILOT
-  auto retrainingBtn = new ButtonControl(tr("Review Training Guide"), tr("REVIEW"), tr("Review the rules, features, and limitations of sunnypilot"));
+  auto retrainingBtn = new ButtonControl(tr("Review Training Guide"), tr("REVIEW"), tr("Review the rules, features, and limitations of CyberPilot"));
   connect(retrainingBtn, &ButtonControl::clicked, [=]() {
     if (ConfirmationDialog::confirm(tr("Are you sure you want to review the training guide?"), tr("Review"), this)) {
       emit reviewTrainingGuide();
@@ -330,7 +330,7 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 }
 
 void DevicePanel::updateCalibDescription() {
-  QString desc = tr("sunnypilot requires the device to be mounted within 4° left or right and within 5° up or 9° down.");
+  QString desc = tr("CyberPilot requires the device to be mounted within 4° left or right and within 5° up or 9° down.");
   std::string calib_bytes = params.get("CalibrationParams");
   if (!calib_bytes.empty()) {
     try {

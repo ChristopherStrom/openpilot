@@ -36,7 +36,7 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
   auto *list = new ListWidget(this, false);
 
   QVBoxLayout *titleLayout = new QVBoxLayout;
-  QLabel *title = new QLabel(tr("🚀 sunnylink 🚀"));
+  QLabel *title = new QLabel(tr("🚀 CyberLink 🚀"));
   title->setStyleSheet("font-size: 90px; font-weight: 500; font-family: 'Noto Color Emoji';");
   titleLayout->addWidget(title, 0, Qt::AlignCenter);
 
@@ -55,10 +55,10 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
 
   list->addItem(titleLayout);
 
-  QString sunnylinkEnabledBtnDesc = tr("This is the master switch, it will allow you to cutoff any sunnylink requests should you want to do that.");
+  QString sunnylinkEnabledBtnDesc = tr("This is the master switch, it will allow you to cutoff any CyberLink requests should you want to do that.");
   sunnylinkEnabledBtn = new ParamControl(
     "SunnylinkEnabled",
-    tr("Enable sunnylink"),
+    tr("Enable CyberLink"),
     sunnylinkEnabledBtnDesc,
     "");
   list->addItem(sunnylinkEnabledBtn);
@@ -66,7 +66,7 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
   status_popup = new SunnylinkSponsorPopup(false, this);
   sponsorBtn = new ButtonControlSP(
     tr("Sponsor Status"), tr("SPONSOR"),
-    tr("Become a sponsor of sunnypilot to get early access to sunnylink features when they become available."));
+    tr("Become a sponsor of CyberPilot to get early access to CyberLink features when they become available."));
   list->addItem(sponsorBtn);
   connect(sponsorBtn, &ButtonControlSP::clicked, [=]() {
     status_popup->exec();
@@ -76,21 +76,21 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
   pair_popup = new SunnylinkSponsorPopup(true, this);
   pairSponsorBtn = new ButtonControlSP(
     tr("Pair GitHub Account"), tr("PAIR"),
-    tr("Pair your GitHub account to grant your device sponsor benefits, including API access on sunnylink.") + "🌟");
+    tr("Pair your GitHub account to grant your device sponsor benefits, including API access on CyberLink.") + "🌟");
   list->addItem(pairSponsorBtn);
   connect(pairSponsorBtn, &ButtonControlSP::clicked, [=]() {
     if (getSunnylinkDongleId().value_or(tr("N/A")) == "N/A") {
-      ConfirmationDialog::alert(tr("sunnylink Dongle ID not found. This may be due to weak internet connection or sunnylink registration issue. Please reboot and try again."), this);
+      ConfirmationDialog::alert(tr("CyberLink Dongle ID not found. This may be due to weak internet connection or CyberLink registration issue. Please reboot and try again."), this);
     } else {
       pair_popup->exec();
     }
   });
   list->addItem(horizontal_line());
 
-  QString sunnylinkUploaderDesc = tr("Enable sunnylink uploader to allow sunnypilot to upload your driving data to sunnypilot servers. (only for highest tiers, and does NOT bring ANY benefit to you. We are just testing data volume.)");
+  QString sunnylinkUploaderDesc = tr("Enable CyberLink uploader to allow CyberPilot to upload your driving data to CyberPilot servers. (only for highest tiers, and does NOT bring ANY benefit to you. We are just testing data volume.)");
   sunnylinkUploaderEnabledBtn = new ParamControlSP(
     "EnableSunnylinkUploader",
-    tr("[Don't use] Enable sunnylink uploader"),
+    tr("[Don't use] Enable CyberPilot uploader"),
     sunnylinkUploaderDesc,
     "", nullptr, true);
   list->addItem(sunnylinkUploaderEnabledBtn);
@@ -103,9 +103,9 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
   connect(sunnylinkEnabledBtn, &ParamControl::toggleFlipped, [=](bool enabled) {
     QString description;
     if (enabled) {
-      description = "<font color='SeaGreen'>"+ tr("🎉Welcome back! We're excited to see you've enabled sunnylink again! 🚀")+ "</font>";
+      description = "<font color='SeaGreen'>"+ tr("🎉Welcome back! We're excited to see you've enabled CyberPilot again! 🚀")+ "</font>";
     } else {
-      description = "<font color='orange'>"+ tr("👋Not going to lie, it's sad to see you disabled sunnylink 😢, but we'll be here when you're ready to come back 🎉.")+ "</font>";
+      description = "<font color='orange'>"+ tr("👋Not going to lie, it's sad to see you disabled CyberPilot 😢, but we'll be here when you're ready to come back 🎉.")+ "</font>";
     }
     sunnylinkEnabledBtn->showDescription();
     sunnylinkEnabledBtn->setDescription(description);
@@ -118,7 +118,7 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
   backupSettings->setObjectName("backup_btn");
   connect(backupSettings, &QPushButton::clicked, [=]() {
     backupSettings->setEnabled(false);
-    if (ConfirmationDialog::confirm(tr("Are you sure you want to backup sunnypilot settings?"), tr("Back Up"), this)) {
+    if (ConfirmationDialog::confirm(tr("Are you sure you want to backup CyberPilot settings?"), tr("Back Up"), this)) {
       params.putBool("BackupManager_CreateBackup", true);
       backup_request_pending = true;
     }
@@ -129,7 +129,7 @@ SunnylinkPanel::SunnylinkPanel(QWidget *parent) : QFrame(parent) {
   restoreSettings->setObjectName("restore_btn");
   connect(restoreSettings, &QPushButton::clicked, [=]() {
     restoreSettings->setEnabled(false);
-    if (ConfirmationDialog::confirm(tr("Are you sure you want to restore the last backed up sunnypilot settings?"), tr("Restore"), this)) {
+    if (ConfirmationDialog::confirm(tr("Are you sure you want to restore the last backed up CyberPilot settings?"), tr("Restore"), this)) {
       params.put("BackupManager_RestoreVersion", "latest");
       restore_request_pending = true;
     }
